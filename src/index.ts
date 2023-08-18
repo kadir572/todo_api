@@ -33,12 +33,13 @@ const corsOptions: cors.CorsOptions = {
   },
 }
 
-console.log(process.env.UI_URL)
-
 app.use(cors(corsOptions))
 
 app.use('/todos', todoRoutes)
 
 const port: number = Number(process.env.PORT) || Number(process.env.SERVER_PORT)
 
-app.listen(port, () => console.log(`App running on port ${port}`))
+app.listen(port, () => {
+  console.log(`App running on port ${port}`)
+  console.log(process.env.UI_URL)
+})
