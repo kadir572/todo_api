@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }))
 const whitelist = [process.env.UI_URL]
 
 const corsOptions = {
-  origin: (origin: string, callback: any) => {
+  origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
