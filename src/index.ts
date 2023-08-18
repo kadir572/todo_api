@@ -33,6 +33,8 @@ const corsOptions: cors.CorsOptions = {
   },
 }
 
+console.log(process.env.UI_URL)
+
 app.use(cors(corsOptions))
 
 app.use('/todos', todoRoutes)
