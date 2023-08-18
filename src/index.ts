@@ -18,14 +18,17 @@ mongoose
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const whitelist = [process.env.UI_URL]
+const whitelist: string[] = [process.env.UI_URL ?? '']
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
+const corsOptions: cors.CorsOptions = {
+  origin: (
+    origin: string | undefined,
+    callback: (error: Error | null, allow: boolean) => void
+  ) => {
+    if (!origin || whitelist.includes(origin)) {
+      callback(null, true) // Allow the request
     } else {
-      callback(new Error('Not allowed by CORS'))
+      callback(new Error('Not allowed by CORS'), false) // Deny the request
     }
   },
 }
@@ -34,6 +37,6 @@ app.use(cors(corsOptions))
 
 app.use('/todos', todoRoutes)
 
-const port = process.env.PORT || process.env.SERVER_PORT
+const port: number = Number(process.env.PORT) || Number(process.env.SERVER_PORT)
 
 app.listen(port, () => console.log(`App running on port ${port}`))
