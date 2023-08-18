@@ -18,7 +18,7 @@ mongoose
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const allowedOrigins = [process.env.UI_URL ?? '']
-console.log(allowedOrigins)
+
 app.use(
   cors({
     origin: allowedOrigins,
