@@ -21,7 +21,7 @@ const allowedOrigins = [process.env.UI_URL ?? '']
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: 'https://kadir-todo.netlify.app',
   })
 )
 
